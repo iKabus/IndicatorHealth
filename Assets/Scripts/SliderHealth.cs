@@ -2,19 +2,17 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Slider))]
-public class SliderHealth : MonoBehaviour
+public class SliderHealth : HealthIndicator
 {
-    [SerializeField] private Health _health;
-
     private Slider _slider;
 
-    private void Start()
+    private void Awake()
     {
         _slider = GetComponent<Slider>();
     }
 
-    private void Update()
+    protected override void ChangeValue(float currentHealth, float maxHealth)
     {
-        _slider.value = _health.CurrentValue / _health.MaxValue;
+        _slider.value = currentHealth / maxHealth;
     }
 }

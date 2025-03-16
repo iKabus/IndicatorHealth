@@ -6,11 +6,13 @@ public class Health : MonoBehaviour
     public float MaxValue { private set; get; } = 100;
     public float CurrentValue { private set; get; }
 
-    public event Action OnCharacterDied;
+    public event Action<float, float> Changed;
 
     private void Start()
     {
         CurrentValue = MaxValue;
+
+        Changed?.Invoke(CurrentValue, MaxValue);
     }
 
     public void TakeDamage(float damage)
@@ -19,8 +21,10 @@ public class Health : MonoBehaviour
 
         if (CurrentValue <= 0)
         {
-            OnCharacterDied?.Invoke();
+            CurrentValue = 0;
         }
+
+        Changed?.Invoke(CurrentValue, MaxValue);
     }
 
     public void Heal(float healValue)
@@ -31,5 +35,7 @@ public class Health : MonoBehaviour
         {
             CurrentValue = MaxValue;
         }
+
+        Changed?.Invoke(CurrentValue, MaxValue);
     }
 }

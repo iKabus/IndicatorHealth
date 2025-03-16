@@ -2,19 +2,17 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Text))]
-public class TextHealth : MonoBehaviour
+public class TextHealth : HealthIndicator
 {
-    [SerializeField] private Health _health;
-
     private Text _text;
 
-    private void Start()
+    private void Awake()
     {
         _text = GetComponent<Text>();
     }
 
-    private void Update()
+    protected override void ChangeValue(float currentHealth, float maxHealth)
     {
-        _text.text = $"{_health.CurrentValue}/{_health.MaxValue}";
+        _text.text = $"{currentHealth}/{maxHealth}";
     }
 }
