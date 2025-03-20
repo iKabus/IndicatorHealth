@@ -6,8 +6,10 @@ public class TextHealth : HealthIndicator
 {
     private Text _text;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         _text = GetComponent<Text>();
     }
 

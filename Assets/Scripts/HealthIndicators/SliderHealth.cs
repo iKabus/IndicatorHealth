@@ -6,8 +6,10 @@ public class SliderHealth : HealthIndicator
 {
     private Slider _slider;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         _slider = GetComponent<Slider>();
     }
 
